@@ -25,8 +25,21 @@ jobs:
     - name: Build with Maven
       run: ./mvnw clean install
 
-    - name: Build Docker container
-      run: docker build -t my_spring_app .
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/my-app:latest
 
     - name: Deploy to Oracle VM
       uses: appleboy/ssh-action@master
@@ -35,5 +48,8 @@ jobs:
         username: ${{ secrets.ORACLE_USERNAME }}
         key: ${{ secrets.ORACLE_SSH_PRIVATE_KEY }}
         script: |
-          docker pull my_spring_app
-          docker run -d -p 80:8080 my_spring_app
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+          docker stop my_app || true
+          docker rm my_app || true
+          docker run -d -p 80:8080 --name my_app ${{ secrets.DOCKER_USERNAME }}/my-app:latest
