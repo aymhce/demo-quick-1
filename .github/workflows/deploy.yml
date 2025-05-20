@@ -19,6 +19,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin' # Or your preferred JDK distribution
 
+    - name: fix permissions
+      run: chmod +x mvnw
+
     - name: Build with Maven
       run: ./mvnw clean install
 
