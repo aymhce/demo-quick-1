@@ -1,0 +1,36 @@
+name: Deploy to Oracle VM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin' # Or your preferred JDK distribution
+
+    - name: Build with Maven
+      run: ./mvnw clean install
+
+    - name: Build Docker container
+      run: docker build -t my_spring_app .
+
+    - name: Deploy to Oracle VM
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.ORACLE_HOST }}
+        username: ${{ secrets.ORACLE_USERNAME }}
+        key: ${{ secrets.ORACLE_SSH_PRIVATE_KEY }}
+        script: |
+          docker pull my_spring_app
+          docker run -d -p 80:8080 my_spring_app
