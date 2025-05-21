@@ -52,4 +52,7 @@ jobs:
           docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:latest
           docker stop my_app || true
           docker rm my_app || true
-          docker run -d -p 80:8080 --name my_app ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+          docker run -d -p 443:8443 \
+            -v ${{ vars.KEYSTORE_DIR }}/keystore.p12:/app/keystore.p12 \
+            -e SPRING_PROFILES_ACTIVE=low-memory,tls \
+            --name my_app ${{ secrets.DOCKER_USERNAME }}/my-app:latest
