@@ -4,6 +4,19 @@ spring.application.name: demo
 server.tomcat.threads.max: 20
 server.tomcat.threads.min-spare: 5
 
-
 # Use a profile that consumes less memory (e.g., by disabling certain features)
 spring.profiles.active: low-memory
+
+# Configuration de la base de données PostgreSQL
+spring.datasource.url: jdbc:postgresql://aws-0-eu-west-3.pooler.supabase.com:5432/postgres
+spring.datasource.username:
+spring.datasource.password:
+spring.datasource.driver-class-name: org.postgresql.Driver
+spring.datasource.pool.mode: session
+
+# Configuration de JPA
+spring.jpa.hibernate.ddl-auto: none
+spring.jpa.show-sql: true
+
+# Liquibase
+spring.liquibase.change-log: classpath:db/changelog/db.changelog-master.yaml

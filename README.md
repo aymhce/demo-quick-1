@@ -1,9 +1,10 @@
 # DEMO QUICK 1
 
-## Archi CICD
+## Archi
 
- * GitHub => GitHub Actions CI+CD => VM Oracle Cloud (ubuntu) => Docker (+ certbot)
- * DNS duckdns.org => VM Oracle Cloud (ubuntu) => Docker => Appli Spring Boot (TLS)
+ * Appli : Spring Boot MVC => Base PostGreSQL
+ * CICD :  GitHub => GitHub Actions => OC (Oracle Cloud) VM (Ubuntu + Docker)
+ * Accès : DNS duckdns.org => OC Virtual Cloud Network (réseau + firewall) => VM OC (Appli (terminaison TLS)) => Supabase (PostGreSQL Managé)
 
 ## CertBot
 
