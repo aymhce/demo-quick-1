@@ -1,0 +1,2 @@
+spring.profiles.default: low-memory
+base.url: https://aymhce.duckdns.org

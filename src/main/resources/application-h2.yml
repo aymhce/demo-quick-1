@@ -4,3 +4,16 @@ spring.datasource.username: sa
 spring.datasource.password:
 spring.h2.console.enabled: true
 spring.h2.console.path: /h2-console
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+    org.springframework.security.oauth2.server.authorization: DEBUG
+    org.springframework.web: DEBUG
+
+    org.springframework.security.web.FilterChainProxy: DEBUG
+    org.springframework.security.authentication: DEBUG
+    org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter: DEBUG
+    org.springframework.security.oauth2.server.authorization.authentication: DEBUG
