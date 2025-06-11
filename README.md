@@ -10,6 +10,20 @@ Une appli, un workload, une base, un espace de stockage ...
  * CICD :  GitHub => GitHub Actions => Docker Hub (private registry) => OC (Oracle Cloud) VM (Ubuntu + Docker)
  * Accès : DNS duckdns.org => OC Virtual Cloud Network (réseau + firewall) => VM OC (Appli (terminaison TLS)) => Supabase (PostGreSQL Managé)
 
+## VM
+
+### Init Docker
+
+```
+sudo apt update
+sudo apt install docker.io
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo usermod -aG docker $USER
+sudo systemctl restart docker
+docker login # pour la registry
+```
+
 ## CertBot
 
 ### Init certificat
