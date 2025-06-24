@@ -9,7 +9,7 @@ public class DemoController {
     // This is a simple REST controller that handles HTTP GET requests
     @GetMapping("/")
     public String hello() {
-         return "Hello, World!";
+         return "Hello, MAIF VIE World!";
     }
     
 }
